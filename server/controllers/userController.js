@@ -4,7 +4,7 @@ const { generateToken } = require('../helpers/jwt')
 
 class UserController {
 
-    static register(req, res) {
+    static register(req, res, next) {
         const { name, email, password } = req.body
 
         User.create({name, email, password})
@@ -13,11 +13,11 @@ class UserController {
             return res.status(201).json({name, email})
         })
         .catch(err => {
-            return res.status(500).json({message: err})
+            return next(err)
         })
     }
 
-    static login(req, res) {
+    static login(req, res, next) {
         let option = {
             where: {email: req.body.email}
         }
@@ -30,15 +30,19 @@ class UserController {
                     const access_token = generateToken(user)
                     return res.status(200).json({access_token})
                 } else {
-                    return res.status(400).json({message: err})
+                    // return res.status(400).json({message: 'Invalid email or password'})
+                    throw {message: 'Invalid email or password', statusCode: 400}
+
                 }
 
             } else {
-                return res.status(400).json({meesage: err})
+                // return res.status(400).json({message: 'Invalid email or password'})
+                throw {message: 'Invalid email or password', statusCode: 400}
+
             }
         })
         .catch(err => {
-            return res.status(500).json({message: err})
+            return next(err)
         })
     }
 }
