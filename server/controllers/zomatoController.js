@@ -17,7 +17,7 @@ class ZomatoController {
                 q
             },
             headers: {
-                "user-key": "46f0cd855e968dcd1cdb21eccc9980e9"
+                "user-key": process.env.ZOMATO_USER_KEY
             },
         })
             .then(function (response) {
