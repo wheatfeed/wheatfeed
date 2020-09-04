@@ -1,9 +1,8 @@
-const axios = require('axios').default;
 const { User } = require('../models')
 const { generateToken } = require('../helpers/jwt')
+const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.GOOOGLE_CLIENT_ID);
-const secret = process.env.SECRET
 
 class GoogleLogin {
     static async verifyLogin(req, res, next){

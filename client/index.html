@@ -10,40 +10,64 @@
 </head>
 
 <body style="padding:0">
+    <!-- <nav class="transparent">
+
+    </nav> -->
+
     <div id="main-menu">
         <div>
             <img src="./assests/img/background.jpg" alt="" style="width: 100vw;height: 70vh;filter: brightness(20%);">
         </div>
         <div style="text-align: center;">
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+            <div style="position: absolute;top: 1em;right: 10%;color:white;">
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1"><i
+                        class="material-icons right" style="color: white;">more_vert</i></a> </div>
             <h1 style="position: absolute;top: 1em;left: 25%;color:white;">Find All Your Food Need</h1>
             <h5 style="position: absolute;top: 7em;left: 22%;color:white;width: 30em;">Lorem, ipsum dolor sit amet
                 consectetur
                 adipisicing elit. Quos tempore ex voluptates a accusamus libero id fugit. Vero, dolore!.</h5>
         </div>
-      
-    
+
         <div style="position: absolute;top: 20em;left:22em;background-color: white;">
             <div class="z-depth-5" style="padding: 20px;width: 50vw;">
-                <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Last Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Last Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Last Name</label>
-                </div>
+                <form action="" id="form-search">
+                    <div class="input-field col s6">
+                        <input id="query" type="text" class="validate">
+                        <label for="query">What Food Do You Want To Search?</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="ingredients" type="text" class="validate">
+                        <label for="ingredients">What ingredients Do You Want To Exclude?</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="maxCalories" type="text" class="validate">
+                        <label for="maxCalories">What's the max calories in the food you want?</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="diet" type="text" class="validate">
+                        <label for="diet">Vegan or Non Vegan?</label>
+                    </div>
+                    <div style="display: flex;justify-content: center;">
+                        <button class="waves-effect waves-light btn" style="margin-top:2em;width: 10em;"
+                            type="submit">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
-    
-        <hr style="margin-top: 10em;width: 40em;">
 
-        <div id="news-list" class="row" style="padding:6em;width: 60em;">
-            <h5>Current News About Food</h5>
-            
+        <div id="search-result" class="row" style="margin-top: 20em;">
+        </div>
+
+        <hr style="margin-top: 5em;width: 40em;">
+
+        <div id="news-list" class="row" style="margin-left:3em;">
+            <h5 style="text-align: center;">News List About Food!!</h5>
+        </div>
+
+        <div id="restaurant-result" class="row" style="margin-top: 10em;">
         </div>
     </div>
 
@@ -56,10 +80,14 @@
                     voluptatem modi!
                     Ducimus ex quasi nam, architecto vel rem mollitia vitae cupiditate similique </p>
                 <div style="margin-top: 5em;" id="toggle-login">
-                    <a href="#">Already Have An Account? <br> <h6>Sign In</h6></a>
+                    <a href="#">Already Have An Account? <br>
+                        <h6>Sign In</h6>
+                    </a>
                 </div>
                 <div style="margin-top: 5em;" id="toggle-regist">
-                    <a href="#">Don't Have An Account? <br> <h6>Sign Up</h6></a>
+                    <a href="#">Don't Have An Account? <br>
+                        <h6>Sign Up</h6>
+                    </a>
                 </div>
             </div>
             <div style="width: 25em;" id="login-form">
