@@ -3,6 +3,7 @@ $(".dropdown-trigger").dropdown();
 const afterLogin = () => {
     $('#login').hide()
     $('#main-menu').show()
+    news()
 }
 
 const loginForm = () => {
@@ -24,6 +25,7 @@ const registerForm = () => {
 
 const login = (event) => {
     event.preventDefault()
+    $('#error-login').empty()
     const email = $('#email').val()
     const password = $('#login-pass').val()
 
@@ -40,10 +42,9 @@ const login = (event) => {
             afterLogin()
             $('#search-result').empty()
             $('#restaurant-result').empty()
-            $('#news-list').show()
         })
         .fail(err => {
-            console.log(err)
+            $('#error-login').append(`${err.responseJSON.errors[0]}`)
         })
 }
 
@@ -51,6 +52,7 @@ const register = (event) => {
     event.preventDefault()
     const email = $('#regist-email').val()
     const password = $('#regist-pass').val()
+    $('#error-register').empty()
 
     $.ajax({
         method: 'POST',
@@ -65,6 +67,7 @@ const register = (event) => {
         })
         .fail(err => {
             console.log(err)
+            $('#error-register').append(`${err.responseJSON.errors[0]}`)
         })
 }
 
