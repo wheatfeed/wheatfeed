@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Tempelkan pengenal aplikasi-->
-    <meta name="google-signin-client_id" content="184214384401-u5k5du2a3a4oj98kmfvfpppgjggildij.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="184214384401-u5k5du2a3a4oj98kmfvfpppgjggildij.apps.googleusercontent.com">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -26,12 +27,11 @@
                 <li><a href="#" id="logout">Logout</a></li>
             </ul>
             <div style="position: absolute;top: 1em;right: 10%;color:white;">
-                <a class="dropdown-trigger" href="#!" data-target="dropdown1"><i
-                        class="material-icons right" style="color: white;">more_vert</i></a> </div>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1"><i class="material-icons right"
+                        style="color: white;">more_vert</i></a> </div>
             <h1 style="position: absolute;top: 1em;left: 25%;color:white;">Find All Your Food Need</h1>
-            <h5 style="position: absolute;top: 7em;left: 22%;color:white;width: 30em;">Lorem, ipsum dolor sit amet
-                consectetur
-                adipisicing elit. Quos tempore ex voluptates a accusamus libero id fugit. Vero, dolore!.</h5>
+            <h5 style="position: absolute;top: 7em;left: 22%;color:white;width: 30em;">Food is an orgasmic experience, that is why we are
+            trying our best to give you the food you are looking for, food is love, food is live</h5>
         </div>
 
         <div style="position: absolute;top: 20em;left:22em;background-color: white;">
@@ -50,8 +50,12 @@
                         <label for="maxCalories">What's the max calories in the food you want?</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="diet" type="text" class="validate">
-                        <label for="diet">Vegan or Non Vegan?</label>
+                        <select id="diet">
+                            <option value="" disabled selected>Choose your Diet</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="paleo">Normal</option>
+                        </select>
+                        <label>Diet</label>
                     </div>
                     <div style="display: flex;justify-content: center;">
                         <button class="waves-effect waves-light btn" style="margin-top:2em;width: 10em;"
@@ -115,14 +119,10 @@
                     </form>
                     <hr style="margin-top:3em;width: 5em;">
                     <div style="text-align: center;margin-top: 2em;">
-                        <p>Or Sign In With</p>
-                        <div class="g-signin2" data-onsuccess="onSignIn" style="display: flex; justify-content:center"></div> <!--Ini tombol sign in google-->
-                        <div style="margin-top: 1em;" id="toggle-regist">
-                            <a href="#" onclick="signOut();">Sign out</a>
-                                <!-- <h6>Sign Up</h6> -->
-                            </a>
+                        <p>Or With</p>
+                        <div class="g-signin2" data-onsuccess="onSignIn" style="display: flex; justify-content:center">
                         </div>
-                        
+                        <!--Ini tombol sign in google-->
                     </div>
                 </div>
             </div>
