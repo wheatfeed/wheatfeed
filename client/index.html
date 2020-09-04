@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Tempelkan pengenal aplikasi-->
+    <meta name="google-signin-client_id" content="184214384401-u5k5du2a3a4oj98kmfvfpppgjggildij.apps.googleusercontent.com">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Document</title>
@@ -113,7 +116,13 @@
                     <hr style="margin-top:3em;width: 5em;">
                     <div style="text-align: center;margin-top: 2em;">
                         <p>Or Sign In With</p>
-                        <p>Google</p>
+                        <div class="g-signin2" data-onsuccess="onSignIn" style="display: flex; justify-content:center"></div> <!--Ini tombol sign in google-->
+                        <div style="margin-top: 1em;" id="toggle-regist">
+                            <a href="#" onclick="signOut();">Sign out</a>
+                                <!-- <h6>Sign Up</h6> -->
+                            </a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -150,6 +159,7 @@
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="script.js"></script>
 </body>
 

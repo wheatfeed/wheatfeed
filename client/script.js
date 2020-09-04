@@ -183,6 +183,20 @@ const logout = (event) => {
     loginForm()
 }
 
+function onSignIn(googleUser) {
+    // mengambil akses token google setiap kali sudah sign in
+    var google_access_token = googleUser.getAuthResponse().id_token;
+    console.log(google_access_token, '>>> google id token');
+}
+
+function signOut() {
+    // sign out google
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
 $(document).ready(() => {
     if (localStorage.getItem('access_token')) {
         afterLogin()

@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 class ZomatoController {
-    static async fetch(req, res) {
+    static async fetch(req, res, next) {
         const { keyword } = req.body //keyword fill with food name
 
         let entity_id = 74 // id for Jakarta
@@ -25,8 +25,7 @@ class ZomatoController {
 
             })
             .catch(function (err) {
-                console.log(err);
-                res.status(500).json(err)
+                next(err)
             })
     }
 }
