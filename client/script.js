@@ -119,6 +119,7 @@ const spoonify = (event) => {
         }
     })
         .done(res => {
+            console.log(res);
             $('#news-list').hide()
             $('#restaurant-result').empty()
             res.results.forEach(data => {
