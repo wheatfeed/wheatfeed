@@ -2,15 +2,12 @@ const axios = require('axios');
 
 class spoonacularController {
 	static async getRecipes(req, res) {
-		const query = "";
-		const ingredients = "spinach";
-		const maxCalories = 800;
-		const diet = "";
+		const { query, ingredients, maxCalories, diet } = req.body
 		const fillIngredients = true;
-		const totalSearch = 3;
-		const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&includeIngredients=${ingredients}&maxCalories=${maxCalories}&diet=${diet}&fillIngredients=${fillIngredients}&number=${totalSearch}&apiKey=${process.env.SPOONACULAR_API_KEY}`;
+		const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&exludeIngredients=${ingredients}&maxCalories=${maxCalories}&diet=${diet}&fillIngredients=${fillIngredients}&apiKey=${process.env.SPOONACULAR_API_KEY}`;
 		try {
-			const response = await axios.get(url);console.log(response.data);
+			const response = await axios.get(url);
+			console.log(response)
 		    return res.status(200).json(response.data);
 		} catch (err) {
 			console.log(err);

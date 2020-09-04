@@ -3,7 +3,7 @@ const ZomatoController = require('../controllers/zomatoController')
 
 const route = require('express').Router()
 
-route.get("/", ZomatoController.fetch)
+route.post("/", ZomatoController.fetch)
 // route.use('/spoonacular', spoonacularRoute)
 
 module.exports = route
