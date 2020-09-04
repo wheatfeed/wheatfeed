@@ -1,9 +1,11 @@
 $(".dropdown-trigger").dropdown();
-
+$(document).ready(function(){
+    $('select').formSelect();
+  });
+  
 const afterLogin = () => {
     $('#login').hide()
     $('#main-menu').show()
-    news()
 }
 
 const loginForm = () => {
@@ -44,7 +46,7 @@ const login = (event) => {
             $('#restaurant-result').empty()
         })
         .fail(err => {
-            $('#error-login').append(`${err.responseJSON.errors[0]}`)
+            $('#error-login').append(`${err.responseJSON.err.message}`)
         })
 }
 
@@ -66,8 +68,8 @@ const register = (event) => {
             loginForm()
         })
         .fail(err => {
-            console.log(err)
-            $('#error-register').append(`${err.responseJSON.errors[0]}`)
+            // console.log(err)
+            $('#error-register').append(`${err.responseJSON.err.errors[0].message}`)
         })
 }
 
@@ -75,6 +77,9 @@ const news = (event) => {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:3001/news',
+        headers : {
+            access_token : localStorage.access_token
+        }
     })
         .done(res => {
             res.data.forEach(data => {
@@ -116,26 +121,37 @@ const spoonify = (event) => {
             ingredients,
             maxCalories,
             diet
+        },
+        headers : {
+            access_token : localStorage.access_token
         }
     })
         .done(res => {
-            console.log(res);
+            // console.log(res);
             $('#news-list').hide()
             $('#restaurant-result').empty()
-            res.results.forEach(data => {
+            if(res.results.length < 1) {
                 $('#search-result').append(`
-                    <div class="card col s3" style="margin:3em;">
-                        <div class="card-image">
-                            <img src="${data.image}" style="height:20em;">
-                        </div>
-                        <div class="card-content">
-                            <p style="height: 5em; ">${data.title}</p>
-                            <a href="#" data-title='${data.title}' onclick="restaurant(event)">Search For The Restaurant</a>
-                        </div>
-                        
-                    </div>
+                <div style="text-align:center;">
+                    <h3>Food Not Found</h3>
+                </div>
                 `)
-            })
+            } else {
+                res.results.forEach(data => {
+                    $('#search-result').append(`
+                        <div class="card col s3" style="margin:3em;">
+                            <div class="card-image">
+                                <img src="${data.image}" style="height:20em;">
+                            </div>
+                            <div class="card-content">
+                                <p style="height: 5em; ">${data.title}</p>
+                                <a href="#" data-title='${data.title}' onclick="restaurant(event)">Search For The Restaurant</a>
+                            </div>
+                            
+                        </div>
+                    `)
+                })
+            }
         })
         .fail(err => {
             console.log(err)
@@ -153,10 +169,14 @@ const restaurant = () => {
         url: 'http://localhost:3001/zomato',
         data: {
             keyword
+        },
+        headers : {
+            access_token : localStorage.access_token
         }
     })
         .done(res => {
-            // console.log(res);
+            console.log(res);
+            
             $('#search-result').empty()
             res.result.restaurants.forEach((el) => {
                 $('#restaurant-result').append(`
@@ -166,6 +186,7 @@ const restaurant = () => {
                         </div>
                         <div class="card-content">
                             <p style="height: 5em;">${el.restaurant.name}</p>
+                            <a href="${el.restaurant.url}" target="_blank">Go To The Restaurant Website</a>
                             <p style="height: 5em;">${el.restaurant.location.address}</p>
                         </div>
                         
@@ -180,21 +201,35 @@ const restaurant = () => {
 
 const logout = (event) => {
     localStorage.clear()
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
     loginForm()
 }
 
 function onSignIn(googleUser) {
     // mengambil akses token google setiap kali sudah sign in
     var google_access_token = googleUser.getAuthResponse().id_token;
-    console.log(google_access_token, '>>> google id token');
-}
-
-function signOut() {
-    // sign out google
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.');
-    });
+    // console.log(google_access_token, '>>> google id token');
+    
+    $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3001/user/google-login',
+        headers : {
+            google_access_token
+        }
+    })
+        .done((res) => {
+            // console.log(res);
+            localStorage.setItem('access_token', res.access_token)
+            afterLogin()
+            $('#search-result').empty()
+            $('#restaurant-result').empty()
+        })
+        .fail((err) => {
+            console.log(err);
+        })
 }
 
 $(document).ready(() => {

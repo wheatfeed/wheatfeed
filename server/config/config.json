@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "super123",
+    "password": "bravo4432",
     "database": "wheatfeed",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
